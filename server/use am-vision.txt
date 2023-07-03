@@ -1,4 +1,4 @@
-log in: ssh config
+log in: ssh amv-vision
 log out: ctr + d
 copy files: rsync -r /home/robbie/Documents/AM-Flow/NeRFs/server amv-vision:NeRFs or reverse
 

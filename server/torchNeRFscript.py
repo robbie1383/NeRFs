@@ -9,7 +9,7 @@ import torch.optim as optim
 import torch.nn as nn
 import torch.autograd as autograd
 
-images_folder = "finalDataset/train/images"
+images_folder = "completeDataset/images"
 poses_file = json.load(open("finalDataset/train/transforms.json"))
 
 print("Loading data...")
@@ -78,5 +78,5 @@ while iteration < maxIterations:
         else:
             break
 
-torch.save(nerf.state_dict(), "torch/torch_NeRF_{}.pth".format(iteration))
+torch.save(nerf.state_dict(), "complete_torch_NeRF_{}.pth".format(iteration))
 print("\nModel saved at torch_NeRF_{}.pth".format(iteration))
