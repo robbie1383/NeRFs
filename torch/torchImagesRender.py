@@ -10,19 +10,19 @@ import torch.nn as nn
 import torch.autograd as autograd
 
 nerf = NeRF(normalize_position=6.0).cuda()
-nerf.load_state_dict(torch.load("torch/torch_NeRF_10000.pth"))
+nerf.load_state_dict(torch.load("torch/complete_torch_NeRF_10000.pth"))
 
-trainImages = "finalDataset/train/images/"
+trainImages = "completeDataset/images/"
+videoImages = "torch/rotation/images/"
 testImages = "finalDataset/test/images/"
 testPoses = json.load(open("finalDataset/test/test.json"))['frames']
-trainPoses = json.load(open("finalDataset/train/transforms.json"))['frames']
+trainPoses = json.load(open("completeDataset/transforms.json"))['frames']
+videoPoses = json.load(open("torch/rotation/video.json"))['frames']
 
-imageList = os.listdir(trainImages)
-for i in range(len(trainPoses[1:10])):
-    name = trainPoses[i]["file_path"][9:]
-    pose = trainPoses[i]["transform_matrix"]
-    print(name)
-    print(pose)
+imageList = os.listdir(videoImages)
+for i in range(len(videoPoses)):
+    name = videoPoses[i]["file_path"][9:]
+    pose = videoPoses[i]["transform_matrix"]
     pose = torch.FloatTensor([pose]).cuda()
     with torch.no_grad():    
         render = nerf.render_image(
@@ -35,5 +35,5 @@ for i in range(len(trainPoses[1:10])):
             6.0, 
             64)
     
-    file = "torch/testTrain/{}.png".format(name)
+    file = "torch/rotation/renders/{}.png".format(name)
     plt.imsave(file, render[0].detach().cpu().numpy())

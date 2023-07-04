@@ -78,5 +78,5 @@ while iteration < maxIterations:
         else:
             break
 
-torch.save(nerf.state_dict(), "torch/torch_NeRF_{}.pth".format(iteration))
+torch.save(nerf.state_dict(), "torch/complete_torch_NeRF_{}.pth".format(iteration))
 print("\nModel saved at torch_NeRF_{}.pth".format(iteration))
